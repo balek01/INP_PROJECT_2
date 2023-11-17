@@ -1,9 +1,9 @@
-; Autor reseni: Jmeno Prijmeni login
-; Pocet cyklu k serazeni puvodniho retezce:
-; Pocet cyklu razeni sestupne serazeneho retezce:
-; Pocet cyklu razeni vzestupne serazeneho retezce:
-; Pocet cyklu razeni retezce s vasim loginem:
-; Implementovany radici algoritmus:
+; Autor reseni: Miroslav Bálek xbalek02
+; Pocet cyklu k serazeni puvodniho retezce: 12765
+; Pocet cyklu razeni sestupne serazeneho retezce: 15696
+; Pocet cyklu razeni vzestupne serazeneho retezce: 281
+; Pocet cyklu razeni retezce s vasim loginem: 1336
+; Implementovany radici algoritmus: Bubble Sort
 ; ------------------------------------------------
 
 ; DATA SEGMENT

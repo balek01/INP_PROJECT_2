@@ -1,14 +1,14 @@
 ; Autor reseni: Miroslav Bálek xbalek02
-; Pocet cyklu k serazeni puvodniho retezce: 12765
-; Pocet cyklu razeni sestupne serazeneho retezce: 15696
-; Pocet cyklu razeni vzestupne serazeneho retezce: 281
-; Pocet cyklu razeni retezce s vasim loginem: 1336
+; Pocet cyklu k serazeni puvodniho retezce: 3574
+; Pocet cyklu razeni sestupne serazeneho retezce: 4447
+; Pocet cyklu razeni vzestupne serazeneho retezce: 272
+; Pocet cyklu razeni retezce s vasim loginem: 816
 ; Implementovany radici algoritmus: Bubble Sort
 ; ------------------------------------------------
 
 ; DATA SEGMENT
                 .data
-;login:          .asciiz "vitejte-v-inp-2023"    ; puvodni uvitaci retezec
+; login:          .asciiz "vitejte-v-inp-2023"    ; puvodni uvitaci retezec
 ; login:          .asciiz "vvttpnjiiee3220---"  ; sestupne serazeny retezec
 ; login:          .asciiz "---0223eeiijnpttvv"  ; vzestupne serazeny retezec
  login:          .asciiz "xbalek02"            ; SEM DOPLNTE VLASTNI LOGIN
@@ -25,10 +25,10 @@ main:
         
 outer_loop:
 
-        daddi $a1, $a1, 1 ;; is not swaped
         dadd $t1, $zero, $zero ; reset inner loop 
         daddi $t2, $zero, 1
         daddi $t3, $zero, 2
+        dadd $a1, $zero, $zero ;not swaped
 inner_loop:
 
         lb $a2, login($t1) ;arr[j]
@@ -37,27 +37,27 @@ inner_loop:
         
 
         sub $t4, $a3, $a2 ; if need to swap
-        beqz $a3, end
         bgez $t4, end_if
 ;if
        
-        
+        daddi $a1, $a1, 1 ;; is  swaped
         sb $a3, login($t1) ;;swap 
         sb $a2, login($t2) ;;swap 
-        dadd $a1, $zero, $zero ;is swaped
         
-
 end_if:
 
-        beqz $a1, inc_outer_loop
         beqz $a0, inc_outer_loop
-
-       
+        
         daddi $t1, $t1, 1 ;;inc
         daddi $t2, $t2, 1
+        daddi $t3, $t3, 1
        
         b inner_loop
 
+inc_outer_loop: 
+        beqz $a1, end
+        daddi $t0, $t0, 1
+        b outer_loop;
 
 end:
 
@@ -70,7 +70,3 @@ print_string:   ; adresa retezce se ocekava v r4
                 daddi   r14, r0, params_sys5    ; adr pro syscall 5 musi do r14
                 syscall 5   ; systemova procedura - vypis retezce na terminal
                 jr      r31 ; return - r31 je urcen na return address
-
-inc_outer_loop: 
-        daddi $t0, $t0, 1
-        b outer_loop;

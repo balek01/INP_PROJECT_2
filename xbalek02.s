@@ -1,8 +1,8 @@
 ; Autor reseni: Miroslav Bálek xbalek02
-; Pocet cyklu k serazeni puvodniho retezce: 3574
-; Pocet cyklu razeni sestupne serazeneho retezce: 4447
-; Pocet cyklu razeni vzestupne serazeneho retezce: 272
-; Pocet cyklu razeni retezce s vasim loginem: 816
+; Pocet cyklu k serazeni puvodniho retezce: 3335
+; Pocet cyklu razeni sestupne serazeneho retezce: 4151
+; Pocet cyklu razeni vzestupne serazeneho retezce: 261
+; Pocet cyklu razeni retezce s vasim loginem: 761
 ; Implementovany radici algoritmus: Bubble Sort
 ; ------------------------------------------------
 
@@ -22,42 +22,38 @@ params_sys5:    .space  8   ; misto pro ulozeni adresy pocatku
                 .text
 main:
         
-        
+        daddi $a1, $zero, 1 ; is  swaped
 outer_loop:
-
+       
         dadd $t1, $zero, $zero ; reset inner loop 
         daddi $t2, $zero, 1
         daddi $t3, $zero, 2
-        dadd $a1, $zero, $zero ;not swaped
+        beqz $a1, end
+        dadd $a1, $zero, $zero ;not swaped        
 inner_loop:
 
         lb $a2, login($t1) ;arr[j]
         lb $a3, login($t2) ;arr[j + 1]
         lb $a0, login($t3) ;arr[j + 2]
-        
+        daddi $t3, $t3, 1
 
         sub $t4, $a3, $a2 ; if need to swap
         bgez $t4, end_if
 ;if
        
-        daddi $a1, $a1, 1 ;; is  swaped
-        sb $a3, login($t1) ;;swap 
-        sb $a2, login($t2) ;;swap 
+        daddi $a1, $a1, 1 ; is  swaped
+        sb $a3, login($t1) ;swap 
+        sb $a2, login($t2) ;swap 
         
 end_if:
 
-        beqz $a0, inc_outer_loop
-        
-        daddi $t1, $t1, 1 ;;inc
+        beqz $a0, outer_loop
+        daddi $t1, $t1, 1 ;inc
         daddi $t2, $t2, 1
-        daddi $t3, $t3, 1
+        
        
         b inner_loop
 
-inc_outer_loop: 
-        beqz $a1, end
-        daddi $t0, $t0, 1
-        b outer_loop;
 
 end:
 
